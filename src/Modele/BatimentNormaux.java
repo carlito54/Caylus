@@ -2,12 +2,12 @@ package Modele;
 
 public class BatimentNormaux extends Batiment{
 	
-	private Ressource[] cout;
+	private Ressource cout;
 	private int prestige;
 	private int coutD;
 	private int faveur;
 	
-	public BatimentNormaux(String nom, Joueur prop, boolean occupe,int pos, int pre, Ressource[] cout,int coutD, int faveur) {
+	public BatimentNormaux(String nom, Joueur prop, boolean occupe,int pos, int pre, Ressource cout,int coutD, int faveur) {
 		super(nom, prop, occupe, pos);
 		this.cout = cout;
 		this.prestige = prestige;
@@ -19,11 +19,11 @@ public class BatimentNormaux extends Batiment{
 		
 	}
 
-	public Ressource[] getCout() {
+	public Ressource getCout() {
 		return cout;
 	}
 
-	public void setCout(Ressource[] cout) {
+	public void setCout(Ressource cout) {
 		this.cout = cout;
 	}
 

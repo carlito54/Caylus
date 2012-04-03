@@ -14,8 +14,6 @@ public class Batiment {
 		this.occupe = occupe;
 		this.position = position;
 	}
-
-	
 	
 	public String getNom() {
 		return nom;
