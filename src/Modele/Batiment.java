@@ -5,6 +5,7 @@ public class Batiment {
 	private String nom;
 	private Joueur proprio;
 	private boolean occupe;
+	private String place;
 	private int position;
 	
 	public Batiment(String nom, Joueur proprio, boolean occupe, int position) {
@@ -15,6 +16,16 @@ public class Batiment {
 		this.position = position;
 	}
 	
+	
+	
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
 	public String getNom() {
 		return nom;
 	}
