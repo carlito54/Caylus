@@ -52,21 +52,22 @@ public class Jeu {
 		Joueur j = null;
 		Batiment bat = null;
 		int i = 0;
+		int k = 0;
 		for(i = 0;i<joueur.size();i++){
-			joueur.get(i).setNbDenier(2);
-		}
-		i = 0;
-		for(i = 1; i <= baili;i++){
-			j = batimentOccupe(i);
-			bat = getBatiment(i);
-			if(j != null){
-				if(bat != null){
-				if(bat.getNom() == "Residence" && bat.getPresent() == bat.getProprio());
-					j.setNbDenier(1);
-				if(bat.getNom() == "Bibliotheque");
-					j.setNbDenier(1);
-				if(bat.getNom() == "Hotel");
-				j.setNbDenier(2);	
+			j = joueur.get(i);
+			j.setNbDenier(2);
+			for(k = 1; k <= baili;k++){
+				j = batimentOccupe(k);
+				bat = getBatiment(k);
+				if(j != null){
+					if(bat != null){
+					if(bat.getNom() == "Residence" && j == bat.getProprio());
+						j.setNbDenier(1);
+					if(bat.getNom() == "Bibliotheque" && j == bat.getProprio());
+						j.setNbDenier(1);
+					if(bat.getNom() == "Hotel" && j == bat.getProprio());
+						j.setNbDenier(2);	
+					}
 				}
 			}
 		}

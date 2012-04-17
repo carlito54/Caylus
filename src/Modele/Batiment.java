@@ -4,6 +4,7 @@ public class Batiment {
 
 	private String nom;
 	private Joueur proprio;
+	private Joueur present;
 	private boolean occupe;
 	private int position;
 	
