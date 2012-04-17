@@ -6,6 +6,7 @@ public class Joueur {
 	private int nbDenier;
 	private int nbPrestige;
 	private Ressource ressource;
+	private Ouvrier ouvrier;
 	
 	public Joueur(String nom, int nbDenier, int nbPrestige, Ressource ressource) {
 		super();
@@ -13,6 +14,15 @@ public class Joueur {
 		this.nbDenier = nbDenier;
 		this.nbPrestige = nbPrestige;
 		this.ressource = ressource;
+		this.ouvrier = new Ouvrier(6);
+	}
+
+	public Ouvrier getOuvrier() {
+		return ouvrier;
+	}
+
+	public void setOuvrier(Ouvrier ouvrier) {
+		this.ouvrier = ouvrier;
 	}
 
 	public String getNom() {
@@ -28,7 +38,7 @@ public class Joueur {
 	}
 
 	public void setNbDenier(int nbDenier) {
-		this.nbDenier = nbDenier;
+		this.nbDenier += nbDenier;
 	}
 
 	public int getNbPrestige() {
@@ -36,7 +46,7 @@ public class Joueur {
 	}
 
 	public void setNbPrestige(int nbPrestige) {
-		this.nbPrestige = nbPrestige;
+		this.nbPrestige += nbPrestige;
 	}
 
 	public Ressource getRessource() {
