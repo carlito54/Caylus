@@ -81,18 +81,45 @@ public class Jeu {
 		Batiment bat;
 		
 		
-		while (ordreTour.size() != fileFinPose.size()){
+		while (ordreTour.size() != 0){
 			// il faudra recuperer le batiment grâce au clique 
 			bat = getBatiment(pos);
 			j = ordreTour.get(i);
 			if(bat.getNom() == "pont"){
 				fileFinPose.add(j); 
+				fileFinPose.add(j);
 				fin ++;
 			}else{
 				if(!bat.isOccupe()){
-					bat.setOccupe(true);
-					j.getOuvrier().setNombre(-1);
+					if(bat.getProprio() == j){
+						bat.setOccupe(true);
+						j.getOuvrier().setNombre(-1);
+						j.setNbDenier(-1);
+					}else{
+						if(bat.getProprio() != j && bat.getProprio() != null){
+							bat.setOccupe(true);
+							j.getOuvrier().setNombre(-1);
+							j.setNbDenier(-(ordreTour.size()+1));
+							bat.getProprio().setNbPrestige(1);
+						}else{
+							if( bat instanceof Auberge){
+								((Auberge) bat).next(j);
+							}else{
+								if(bat instanceof Ecurie){
+									((Ecurie) bat).next(j);
+								}else{
+									bat.setOccupe(true);
+									j.getOuvrier().setNombre(-1);
+									j.setNbDenier(-(ordreTour.size()+1));
+								}
+							}
+						}
+					}
 				}
+			}
+			if(j.getOuvrier().getNombre() == 0){
+				ordreTour.remove(j);
+				fileFinPose.add(j);
 			}
 			if(i == ordreTour.size() - 1);
 				i = 0;
