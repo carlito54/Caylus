@@ -10,6 +10,7 @@ public class Jeu {
 	private ArrayList<Joueur> ordreTour;
 	private int prevot;
 	private int baili;
+	private Auberge auberge;
 	private ArrayList<Batiment> listeBatiment;
 	
 	
@@ -20,6 +21,8 @@ public class Jeu {
 		this.prevot = prevot;
 		this.baili = baili;
 		this.listeBatiment = listeBatiment;
+		this.auberge = new Auberge("Auberge", 7);
+		
 	}
 	
 	public Batiment getBatiment(int pos){
@@ -98,6 +101,7 @@ public class Jeu {
 						if(bat.getProprio() != j && bat.getProprio() != null){
 							bat.setOccupe(true);
 							j.getOuvrier().setNombre(-1);
+							if()
 							j.setNbDenier(-(ordreTour.size()+1));
 							bat.setPresent(j);
 							bat.getProprio().setNbPrestige(1);
