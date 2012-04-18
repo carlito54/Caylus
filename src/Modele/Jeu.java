@@ -93,11 +93,13 @@ public class Jeu {
 						bat.setOccupe(true);
 						j.getOuvrier().setNombre(-1);
 						j.setNbDenier(-1);
+						bat.setPresent(j);
 					}else{
 						if(bat.getProprio() != j && bat.getProprio() != null){
 							bat.setOccupe(true);
 							j.getOuvrier().setNombre(-1);
 							j.setNbDenier(-(ordreTour.size()+1));
+							bat.setPresent(j);
 							bat.getProprio().setNbPrestige(1);
 						}else{
 							if( bat instanceof Auberge){
@@ -127,6 +129,44 @@ public class Jeu {
 	public void activationPorte(Joueur j){
 		
 	}
+
+	public void activeComptoir(Joueur j){
+		j.setNbDenier(3);
+	}
+	
+	public void activeGuilde(){
+		//récupérer le clic et calculer la nouvelle position du baili en fonction de clic -3 a +3 places
+		setBaili(0);
+	}
+	
+	public void activeJoute(Joueur j){
+		j.setNbDenier(-1);
+		Ressource ress = j.getRessource();
+		if(ress.getTissu() > 2){
+			ress.setTissu(-3);
+		}
+	}
+	
+	public ArrayList<Joueur> activeEcurie(Ecurie e){
+		ArrayList<Joueur> ecurie = new ArrayList<Joueur>();
+		ecurie.add(e.getPlace1());
+		if(e.getPlace2() !=null){
+			ecurie.add(e.getPlace2());
+			if(e.getPlace3()!= null){
+				ecurie.add(e.getPlace3());
+			}
+		}
+		int i = 0;
+		Joueur j;
+		for(i=0;i<ordreTour.size();i++){
+			j = ordreTour.get(i);
+			if(!ecurie.contains(j));
+				ecurie.add(j);
+		}
+		return ecurie;
+	}
+	
+	
 	
 	public ArrayList<Joueur> getFileFinPose() {
 		return fileFinPose;
