@@ -7,8 +7,8 @@ public class BatimentNormaux extends Batiment{
 	private int coutD;
 	private int faveur;
 	
-	public BatimentNormaux(String nom, Joueur prop, boolean occupe,int pos, int pre, Ressource cout,int coutD, int faveur) {
-		super(nom, prop, occupe, pos);
+	public BatimentNormaux(String nom,int pos) {
+		super(nom, pos);
 		this.cout = cout;
 		this.prestige = prestige;
 		this.coutD = coutD;

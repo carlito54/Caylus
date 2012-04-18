@@ -5,8 +5,8 @@ public class Auberge extends BatimentSpeciaux{
 	private Joueur place1;
 	private Joueur place2;
 	
-	public Auberge() {
-		super();
+	public Auberge(String nom, int pos) {
+		super(nom, pos);
 		this.place1 = null;
 		this.place2 = null;
 	}

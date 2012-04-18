@@ -73,15 +73,12 @@ public class Jeu {
 		}
 	}
 	
-	public void placerOuvrier(){
-		
+	public void placerOuvrier(){	
 		int fin = 0;
 		int i = 0; 
 		int pos = 0;
 		Joueur j;
 		Batiment bat;
-		
-		
 		while (ordreTour.size() != 0){
 			// il faudra recuperer le batiment grâce au clique 
 			bat = getBatiment(pos);
@@ -125,6 +122,10 @@ public class Jeu {
 			if(i == ordreTour.size() - 1);
 				i = 0;
 		}
+	}
+	
+	public void activationPorte(Joueur j){
+		
 	}
 	
 	public ArrayList<Joueur> getFileFinPose() {

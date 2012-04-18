@@ -7,11 +7,11 @@ public class Ecurie extends BatimentSpeciaux{
 	private Joueur place3;
 	
 	
-	public Ecurie(Joueur place1, Joueur place2, Joueur place3) {
-		super();
-		this.place1 = place1;
-		this.place2 = place2;
-		this.place3 = place3;
+	public Ecurie(String nom, int position) {
+		super(nom, position);
+		this.place1 = null;
+		this.place2 = null;
+		this.place3 = null;
 	}
 	
 	public void next(Joueur j){

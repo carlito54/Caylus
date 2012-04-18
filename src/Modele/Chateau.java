@@ -5,21 +5,21 @@ import java.util.HashMap;
 
 public class Chateau extends Batiment{
 
-	private Joueur[] ordreConst;
+	private ArrayList<Joueur> ordreConst;
 	private int decompte;
 	private HashMap<String, Joueur[]> construire;
 	
-	public Chateau(String nom, Joueur proprio, boolean occupe, int position, int decom, Joueur[] ordre) {
-		super(nom, proprio, occupe, position);
+	public Chateau(String nom, int position, int decom, ArrayList<Joueur> ordre) {
+		super(nom, position);
 		this.decompte = decom;
 		this.ordreConst = ordre;
 	}
 
-	public Joueur[] getOrdreConst() {
+	public ArrayList<Joueur> getOrdreConst() {
 		return ordreConst;
 	}
 
-	public void setOrdreConst(Joueur[] ordreConst) {
+	public void setOrdreConst(ArrayList<Joueur> ordreConst) {
 		this.ordreConst = ordreConst;
 	}
 
