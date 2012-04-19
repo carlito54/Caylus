@@ -76,6 +76,15 @@ public class Jeu {
 		}
 	}
 	
+	public void payer(Joueur j){
+		j.getOuvrier().setNombre(-1);
+		if(j == auberge.getPlace2()){
+			j.setNbDenier(-1);
+		}else{
+			j.setNbDenier(-(ordreTour.size()+1));	
+		}
+	}
+	
 	public void placerOuvrier(){	
 		int fin = 0;
 		int i = 0; 
@@ -94,27 +103,33 @@ public class Jeu {
 				if(!bat.isOccupe()){
 					if(bat.getProprio() == j){
 						bat.setOccupe(true);
-						j.getOuvrier().setNombre(-1);
-						j.setNbDenier(-1);
+						payer(j);
 						bat.setPresent(j);
 					}else{
 						if(bat.getProprio() != j && bat.getProprio() != null){
 							bat.setOccupe(true);
-							j.getOuvrier().setNombre(-1);
-							if()
-							j.setNbDenier(-(ordreTour.size()+1));
+							payer(j);
 							bat.setPresent(j);
 							bat.getProprio().setNbPrestige(1);
 						}else{
 							if( bat instanceof Auberge){
 								((Auberge) bat).next(j);
+								payer(j);
 							}else{
 								if(bat instanceof Ecurie){
 									((Ecurie) bat).next(j);
+									payer(j);
 								}else{
-									bat.setOccupe(true);
-									j.getOuvrier().setNombre(-1);
-									j.setNbDenier(-(ordreTour.size()+1));
+									if(bat instanceof Chateau){
+										if(!((Chateau) bat).getOrdreConst().contains(j)){
+											((Chateau) bat).getOrdreConst().add(j);
+											payer(j);
+										}else{
+											bat.setOccupe(true);
+											bat.setPresent(j);
+											payer(j);
+										}
+									}
 								}
 							}
 						}
@@ -136,11 +151,13 @@ public class Jeu {
 
 	public void activeComptoir(Joueur j){
 		j.setNbDenier(3);
+		j.getOuvrier().setNombre(1);
 	}
 	
-	public void activeGuilde(){
+	public void activeGuilde(Joueur j){
 		//récupérer le clic et calculer la nouvelle position du baili en fonction de clic -3 a +3 places
-		setBaili(0);
+		setPrevot(0);
+		j.getOuvrier().setNombre(1);
 	}
 	
 	public void activeJoute(Joueur j){
@@ -169,6 +186,22 @@ public class Jeu {
 		}
 		return ecurie;
 	}
+	/**
+	 * 
+	 * @param j
+	 * 
+	 * Il faudra mettre en place une boucle dans le main qui parcours le tableau des joueurs dans l'ordre de jeu et chacun son tour pourra déplacer le prevot.
+	 */
+	public void deplacementBaili(Joueur j){
+		int dep = 0;
+		// on récupère par le biais du clic la nouvelle position du prévot et on calcule le nombre de case déplacé.
+		setPrevot(dep);
+		j.setNbDenier(dep);
+		
+		
+	}
+	
+	
 	
 	
 	
