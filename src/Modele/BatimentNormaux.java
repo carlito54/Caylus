@@ -2,7 +2,7 @@ package Modele;
 
 public class BatimentNormaux extends Batiment{
 	
-	private Ressource cout;
+	
 	private int prestige;
 	private int coutD;
 	private int faveur;

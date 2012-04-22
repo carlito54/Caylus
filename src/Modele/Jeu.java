@@ -192,7 +192,7 @@ public class Jeu {
 	 * 
 	 * Il faudra mettre en place une boucle dans le main qui parcours le tableau des joueurs dans l'ordre de jeu et chacun son tour pourra déplacer le prevot.
 	 */
-	public void deplacementBaili(Joueur j){
+	public void deplacementPrevot(Joueur j){
 		int dep = 0;
 		// on récupère par le biais du clic la nouvelle position du prévot et on calcule le nombre de case déplacé.
 		setPrevot(dep);

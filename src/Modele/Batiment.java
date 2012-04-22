@@ -7,14 +7,16 @@ public class Batiment {
 	private Joueur present;
 	private boolean occupe;
 	private int position;
+	private Ressource cout;
 	
-	public Batiment(String nom, int position) {
+	public Batiment(String nom, int position, Ressource cout) {
 		super();
 		this.nom = nom;
 		this.proprio = null;
 		this.present = null;
 		this.occupe = false;
 		this.position = position;
+		this.cout = cout;
 	}
 	
 	public String getNom() {
