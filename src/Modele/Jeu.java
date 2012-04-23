@@ -1,5 +1,6 @@
 package Modele;
 
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,17 +15,18 @@ public class Jeu {
 	private ArrayList<Batiment> listeBatiment;
 	
 	
-	public Jeu(ArrayList<Joueur> fileFinPose, ArrayList<Joueur> ordreTour, int prevot, int baili, ArrayList<Batiment> listeBatiment) {
+	public Jeu(int prevot, int baili, ArrayList<Batiment> listeBatiment) {
 		super();
-		this.fileFinPose = fileFinPose;
-		this.ordreTour = ordreTour;
+		this.fileFinPose = new ArrayList<Joueur>();
+		this.ordreTour = new ArrayList<Joueur>();
 		this.prevot = prevot;
 		this.baili = baili;
 		this.listeBatiment = listeBatiment;
 		this.auberge = new Auberge("Auberge", 7);
 		
 	}
-	
+
+
 	public Batiment getBatiment(int pos){
 		int i = 0;
 		boolean trouve = false;
@@ -205,6 +207,13 @@ public class Jeu {
 	
 	
 	
+	public ArrayList<Joueur> getJoueur() {
+		return joueur;
+	}
+
+	public void setJoueur(ArrayList<Joueur> joueur) {
+		this.joueur = joueur;
+	}
 	public ArrayList<Joueur> getFileFinPose() {
 		return fileFinPose;
 	}
@@ -229,6 +238,8 @@ public class Jeu {
 	public void setBaili(int baili) {
 		this.baili = baili;
 	}
+
+
 	
 	
 	
