@@ -9,10 +9,10 @@ public class Chateau extends Batiment{
 	private int decompte;
 	private HashMap<String, Joueur[]> construire;
 	
-	public Chateau(String nom, int position, int decom, ArrayList<Joueur> ordre) {
+	public Chateau(String nom, int position, int decom) {
 		super(nom, position);
 		this.decompte = decom;
-		this.ordreConst = ordre;
+		this.ordreConst = new ArrayList<Joueur>();
 	}
 
 	public ArrayList<Joueur> getOrdreConst() {

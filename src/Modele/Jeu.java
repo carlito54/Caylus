@@ -1,7 +1,9 @@
 package Modele;
 
 import java.awt.Container;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class Jeu {
@@ -11,11 +13,13 @@ public class Jeu {
 	private ArrayList<Joueur> ordreTour;
 	private int prevot;
 	private int baili;
+	private Coordonnee[] coord;
+
 	private Auberge auberge;
-	private ArrayList<Batiment> listeBatiment;
+	private HashMap<Integer, Batiment> listeBatiment;
 	
 	
-	public Jeu(int prevot, int baili, ArrayList<Batiment> listeBatiment) {
+	public Jeu(int prevot, int baili, HashMap<Integer, Batiment> listeBatiment) {
 		super();
 		this.fileFinPose = new ArrayList<Joueur>();
 		this.ordreTour = new ArrayList<Joueur>();
@@ -23,8 +27,38 @@ public class Jeu {
 		this.baili = baili;
 		this.listeBatiment = listeBatiment;
 		this.auberge = new Auberge("Auberge", 7);
+		coord = new Coordonnee[36];
+		coord[8] = new Coordonnee(140, 250);
+		coord[9] = new Coordonnee(65, 275);
+		coord[10] = new Coordonnee(42, 340);
+		coord[11] = new Coordonnee(122, 355);
+		coord[12] = new Coordonnee(205, 360);
+		coord[13] = new Coordonnee(285, 365);
+		coord[14] = new Coordonnee(365, 365);
+		coord[15] = new Coordonnee(440, 370);
+		coord[16] = new Coordonnee(512, 435);
+		coord[17] = new Coordonnee(510, 435);
+		coord[18] = new Coordonnee(435, 440);
+		coord[19] = new Coordonnee(360, 443);
+		coord[20] = new Coordonnee(285, 443);
+		coord[21] = new Coordonnee(208, 445);
+		coord[22] = new Coordonnee(130, 448);
+		coord[23] = new Coordonnee(50, 457);
+		coord[24] = new Coordonnee(60, 517);
+		coord[25] = new Coordonnee(140, 527);
+		coord[26] = new Coordonnee(220, 535);
+		coord[27] = new Coordonnee(295, 540);
+		coord[28] = new Coordonnee(371, 548);
+		coord[29] = new Coordonnee(449, 542);
+		coord[30] = new Coordonnee(526, 585);
+		coord[31] = new Coordonnee(448, 624);
+		coord[32] = new Coordonnee(370, 624);
+		coord[33] = new Coordonnee(288, 625);
+		coord[34] = new Coordonnee(205, 626);
+		coord[35] = new Coordonnee(122, 626);
 		
 	}
+
 
 
 	public Batiment getBatiment(int pos){
@@ -62,16 +96,16 @@ public class Jeu {
 			j = joueur.get(i);
 			j.setNbDenier(2);
 			for(k = 1; k <= baili;k++){
-				j = batimentOccupe(k);
-				bat = getBatiment(k);
-				if(j != null){
+				//j = batimentOccupe(k);
+				bat = listeBatiment.get(k);
+				if(bat != null){
 					if(bat != null){
-					if(bat.getNom() == "Residence" && j == bat.getProprio());
-						j.setNbDenier(1);
-					if(bat.getNom() == "Bibliotheque" && j == bat.getProprio());
-						j.setNbDenier(1);
-					if(bat.getNom() == "Hotel" && j == bat.getProprio());
-						j.setNbDenier(2);	
+						if(bat.getNom() == "Residence" && j == bat.getProprio());
+							j.setNbDenier(1);
+						if(bat.getNom() == "Bibliotheque" && j == bat.getProprio());
+							j.setNbDenier(1);
+						if(bat.getNom() == "Hotel" && j == bat.getProprio());
+							j.setNbDenier(2);	
 					}
 				}
 			}
@@ -203,10 +237,68 @@ public class Jeu {
 		
 	}
 	
+	public ArrayList<Integer> batNeutreRamdom(){
+		ArrayList<Integer> res = new ArrayList<Integer>(); 
+		while(res.size() != 6){
+			int val = (int) (Math.random()*6);
+			if(!res.contains(val)){
+				res.add(val);
+			}		
+		}
+		return res;
+	}
 	
+	public void ajoutNeutre(int i, int place){
+		switch (i) {
+		case 0:
+			listeBatiment.put(place, new BatimentProduction("Bois1", place, new Ressource(0,0,0,0,0)));
+			System.out.println("placement de : "+place);
+			break;
+		case 1:
+			listeBatiment.put(place, new BatimentProduction("Pierre1", place, new Ressource(0,0,0,0,0)));
+			System.out.println("placement de : "+place);
+			break;
+		case 2:
+			listeBatiment.put(place, new BatimentProduction("BoisNourriture1", place, new Ressource(0,0,0,0,0)));
+			System.out.println("placement de : "+place);
+			break;
+		case 3:
+			listeBatiment.put(place, new BatimentProduction("CharpentierNeutre", place, new Ressource(0,0,0,0,0)));
+			System.out.println("placement de : "+place);
+			break;
+		case 4:
+			listeBatiment.put(place, new BatimentProduction("Marche1", place, new Ressource(0,0,0,0,0)));
+			System.out.println("placement de : "+place);
+			break;
+		case 5:
+			listeBatiment.put(place, new BatimentProduction("Nourriture1", place, new Ressource(0,0,0,0,0)));
+			System.out.println("placement de : "+place);
+			break;
+		default:
+			break;
+		}
+
+		
+	}
+
+	public Coordonnee[] getCoord() {
+		return coord;
+	}
+
+
+	public void setCoord(Coordonnee[] coord) {
+		this.coord = coord;
+	}
+
 	
-	
-	
+	public HashMap<Integer, Batiment> getListeBatiment() {
+		return listeBatiment;
+	}
+
+
+	public void setListeBatiment(HashMap<Integer, Batiment> listeBatiment) {
+		this.listeBatiment = listeBatiment;
+	}
 	public ArrayList<Joueur> getJoueur() {
 		return joueur;
 	}
@@ -238,10 +330,5 @@ public class Jeu {
 	public void setBaili(int baili) {
 		this.baili = baili;
 	}
-
-
-	
-	
-	
 
 }

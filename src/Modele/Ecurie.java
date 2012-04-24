@@ -1,6 +1,6 @@
 package Modele;
 
-public class Ecurie extends Batiment{
+public class Ecurie extends BatimentSpeciaux{
 
 	private Joueur place1;
 	private Joueur place2;
