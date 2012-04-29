@@ -5,7 +5,6 @@ public class Ouvrier {
 	private int nombre;
 
 	public Ouvrier(int nombre) {
-		super();
 		this.nombre = nombre;
 	}
 

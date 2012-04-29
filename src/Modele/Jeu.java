@@ -1,8 +1,8 @@
 package Modele;
 
-import Modele.Batiments.Chateau;
-import Modele.Batiments.BatimentProduction;
 import Modele.Batiments.Auberge;
+import Modele.Batiments.BatimentProduction;
+import Modele.Batiments.Chateau;
 import java.util.ArrayList;
 import java.util.HashMap;
 

@@ -3,15 +3,14 @@ package Modele;
 public class Joueur {
 
 	private String nom;
-	private int nbDenier;
+	private int nbDeniers;
 	private int nbPrestige;
 	private Ressource ressource;
 	private Ouvrier ouvrier;
 	
-	public Joueur(String nom, int nbDenier, int nbPrestige, Ressource ressource) {
-		super();
+	public Joueur(String nom, int nbDeniers, int nbPrestige, Ressource ressource) {
 		this.nom = nom;
-		this.nbDenier = nbDenier;
+		this.nbDeniers = nbDeniers;
 		this.nbPrestige = nbPrestige;
 		this.ressource = ressource;
 		this.ouvrier = new Ouvrier(6);
@@ -34,11 +33,11 @@ public class Joueur {
 	}
 
 	public int getNbDenier() {
-		return nbDenier;
+		return nbDeniers;
 	}
 
 	public void setNbDenier(int nbDenier) {
-		this.nbDenier += nbDenier;
+		this.nbDeniers += nbDenier;
 	}
 
 	public int getNbPrestige() {
