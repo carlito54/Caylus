@@ -1,5 +1,7 @@
 package Modele;
 
+import Modele.Batiments.BatimentSpeciaux;
+
 public class Ecurie extends BatimentSpeciaux{
 
 	private Joueur place1;

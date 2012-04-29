@@ -1,4 +1,6 @@
-package Modele;
+package Modele.Batiments;
+
+import Modele.Ressource;
 
 public class BatimentProduction extends BatimentNormaux{
 	

@@ -55,10 +55,5 @@ public class Joueur {
 
 	public void setRessource(Ressource ressource) {
 		this.ressource = ressource;
-	}
-	
-	
-	
-	
-	
+	}	
 }

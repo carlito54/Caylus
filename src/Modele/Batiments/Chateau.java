@@ -1,5 +1,7 @@
-package Modele;
+package Modele.Batiments;
 
+import Modele.Batiment;
+import Modele.Joueur;
 import java.util.ArrayList;
 import java.util.HashMap;
 

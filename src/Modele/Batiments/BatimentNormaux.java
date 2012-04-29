@@ -1,4 +1,8 @@
-package Modele;
+package Modele.Batiments;
+
+import Modele.Batiment;
+import Modele.Joueur;
+import Modele.Ressource;
 
 public class BatimentNormaux extends Batiment{
 	

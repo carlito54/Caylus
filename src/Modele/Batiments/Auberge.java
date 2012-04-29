@@ -1,4 +1,6 @@
-package Modele;
+package Modele.Batiments;
+
+import Modele.Joueur;
 
 public class Auberge extends BatimentSpeciaux{
 	

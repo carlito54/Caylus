@@ -1,5 +1,14 @@
-package Modele;
+package Vue;
 
+import Modele.Batiments.Auberge;
+import Modele.Batiment;
+import Modele.Batiments.BatimentSpeciaux;
+import Modele.Batiments.Chateau;
+import Modele.Coordonnee;
+import Modele.Ecurie;
+import Modele.Jeu;
+import Modele.Joueur;
+import Modele.Ressource;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -51,7 +60,7 @@ public class IHM {
 		neutre[3] = "Images/CharpentierNeutre.jpg";
 		neutre[4] = "Images/Marche1.jpg";
 		neutre[5] = "Images/Nourriture1.jpg";
-		JLabel jl = new JLabel("Combien de joueurs (1 à 5)? : ");
+		JLabel jl = new JLabel("Combien de joueurs (1 ï¿½ 5)? : ");
 		jt = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		jt.setPreferredSize(new Dimension(20,20));
 		JButton jb = new JButton("Valider");
@@ -67,7 +76,7 @@ public class IHM {
 	 class BoutonListener  implements ActionListener{
 		 
          /**
-          * Redéfinition de la méthode actionPerformed
+          * Redï¿½finition de la mï¿½thode actionPerformed
           */
          public void actionPerformed(ActionEvent arg0) {
         	 Coordonnee[] coord = jeu.getCoord();

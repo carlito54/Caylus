@@ -1,14 +1,14 @@
 package Modele;
 
-import java.awt.Container;
-import java.lang.reflect.Array;
+import Modele.Batiments.Chateau;
+import Modele.Batiments.BatimentProduction;
+import Modele.Batiments.Auberge;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class Jeu {
 	
-	private ArrayList<Joueur> joueur;
+	private ArrayList<Joueur> joueurs;
 	private ArrayList<Joueur> fileFinPose;
 	private ArrayList<Joueur> ordreTour;
 	private int prevot;
@@ -21,8 +21,8 @@ public class Jeu {
 	
 	public Jeu(int prevot, int baili, HashMap<Integer, Batiment> listeBatiment) {
 		super();
-		this.fileFinPose = new ArrayList<Joueur>();
-		this.ordreTour = new ArrayList<Joueur>();
+		this.fileFinPose = new ArrayList<>();
+		this.ordreTour = new ArrayList<>();
 		this.prevot = prevot;
 		this.baili = baili;
 		this.listeBatiment = listeBatiment;
@@ -56,7 +56,6 @@ public class Jeu {
 		coord[33] = new Coordonnee(288, 625);
 		coord[34] = new Coordonnee(205, 626);
 		coord[35] = new Coordonnee(122, 626);
-		
 	}
 
 
@@ -92,8 +91,8 @@ public class Jeu {
 		Batiment bat = null;
 		int i = 0;
 		int k = 0;
-		for(i = 0;i<joueur.size();i++){
-			j = joueur.get(i);
+		for(i = 0;i<joueurs.size();i++){
+			j = joueurs.get(i);
 			j.setNbDenier(2);
 			for(k = 1; k <= baili;k++){
 				//j = batimentOccupe(k);
@@ -128,7 +127,7 @@ public class Jeu {
 		Joueur j;
 		Batiment bat;
 		while (ordreTour.size() != 0){
-			// il faudra recuperer le batiment grâce au clique 
+			// il faudra recuperer le batiment grï¿½ce au clique 
 			bat = getBatiment(pos);
 			j = ordreTour.get(i);
 			if(bat.getNom() == "pont"){
@@ -191,7 +190,7 @@ public class Jeu {
 	}
 	
 	public void activeGuilde(Joueur j){
-		//récupérer le clic et calculer la nouvelle position du baili en fonction de clic -3 a +3 places
+		//rï¿½cupï¿½rer le clic et calculer la nouvelle position du baili en fonction de clic -3 a +3 places
 		setPrevot(0);
 		j.getOuvrier().setNombre(1);
 	}
@@ -226,11 +225,11 @@ public class Jeu {
 	 * 
 	 * @param j
 	 * 
-	 * Il faudra mettre en place une boucle dans le main qui parcours le tableau des joueurs dans l'ordre de jeu et chacun son tour pourra déplacer le prevot.
+	 * Il faudra mettre en place une boucle dans le main qui parcours le tableau des joueurs dans l'ordre de jeu et chacun son tour pourra dï¿½placer le prevot.
 	 */
 	public void deplacementPrevot(Joueur j){
 		int dep = 0;
-		// on récupère par le biais du clic la nouvelle position du prévot et on calcule le nombre de case déplacé.
+		// on rï¿½cupï¿½re par le biais du clic la nouvelle position du prï¿½vot et on calcule le nombre de case dï¿½placï¿½.
 		setPrevot(dep);
 		j.setNbDenier(dep);
 		
@@ -300,11 +299,11 @@ public class Jeu {
 		this.listeBatiment = listeBatiment;
 	}
 	public ArrayList<Joueur> getJoueur() {
-		return joueur;
+		return joueurs;
 	}
 
 	public void setJoueur(ArrayList<Joueur> joueur) {
-		this.joueur = joueur;
+		this.joueurs = joueur;
 	}
 	public ArrayList<Joueur> getFileFinPose() {
 		return fileFinPose;

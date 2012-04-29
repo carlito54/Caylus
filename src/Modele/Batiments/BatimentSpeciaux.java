@@ -1,4 +1,6 @@
-package Modele;
+package Modele.Batiments;
+
+import Modele.Batiment;
 
 public class BatimentSpeciaux extends Batiment{
 	
