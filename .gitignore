@@ -1,0 +1,23 @@
+# Les ligne commençant par '#' sont des commentaires.
+# Les fichiers nommés ici seront ignorés par git
+
+# Ignorer tous les fichiers dans le dossier 'build' et ses sous-répertoires
+build/**
+
+# Ignorer tous les fichiers dans le dossier '.settings' et ses sous-répertoires
+.settings/**
+
+# Ignorer tous les fichiers dans le dossier 'nbproject' et ses sous-répertoires
+nbproject/**
+
+# Ignorer les fichiers .xml
+*.xml
+
+# Ignorer les fichiers .xmf
+*.mf
+
+# Ignorer les fichiers .classpath
+*.classpath
+
+# Ignorer les fichiers .project
+*.project

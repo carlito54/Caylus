@@ -1,19 +1,43 @@
 package Modele;
 
-public class Batiment {
+import java.awt.Image;
+
+public class Batiment extends ImagePanel{
 
 	private String nom;
 	private Joueur proprio;
+	private Joueur present;
 	private boolean occupe;
 	private String place;
 	private int position;
 	
-	public Batiment(String nom, Joueur proprio, boolean occupe, int position) {
+
+    public Batiment(Image image,String nom, int position) {
+		super(image);
+		this.nom = nom;
+		this.proprio = null;
+		this.present = null;
+		this.occupe = false;
+		this.position = position;
+    }
+    
+    public Batiment(Image image, int w, int h) {
+        super(image,w,h);
+		this.nom = nom;
+		this.proprio = null;
+		this.present = null;
+		this.occupe = false;
+		this.position = position;
+
+    }
+	public Batiment(String nom, int position) {
 		super();
 		this.nom = nom;
-		this.proprio = proprio;
-		this.occupe = occupe;
+		this.proprio = null;
+		this.present = null;
+		this.occupe = false;
 		this.position = position;
+		
 	}
 	
 	
@@ -28,6 +52,14 @@ public class Batiment {
 
 	public String getNom() {
 		return nom;
+	}
+
+	public Joueur getPresent() {
+		return present;
+	}
+
+	public void setPresent(Joueur present) {
+		this.present = present;
 	}
 
 	public void setNom(String nom) {
