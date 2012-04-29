@@ -163,11 +163,11 @@ public class IHM {
 
          public ArrayList<Joueur> initialisationPlateau(int joueur){
         	 
-        	 Joueur j1 = new Joueur("Joueur1", 0, 0, new Ressource(0,0,0,0,0));
-        	 Joueur j2 = new Joueur("Joueur2", 0, 0, new Ressource(0,0,0,0,0));
-        	 Joueur j3 = new Joueur("Joueur3", 0, 0, new Ressource(0,0,0,0,0));
-        	 Joueur j4 = new Joueur("Joueur4", 0, 0, new Ressource(0,0,0,0,0));
-        	 Joueur j5 = new Joueur("Joueur5", 0, 0, new Ressource(0,0,0,0,0));
+        	 Joueur j1 = new Joueur("Joueur1", 0, 0, new Ressource());
+        	 Joueur j2 = new Joueur("Joueur2", 0, 0, new Ressource());
+        	 Joueur j3 = new Joueur("Joueur3", 0, 0, new Ressource());
+        	 Joueur j4 = new Joueur("Joueur4", 0, 0, new Ressource());
+        	 Joueur j5 = new Joueur("Joueur5", 0, 0, new Ressource());
         	 ArrayList<Joueur> j = new ArrayList<Joueur>();
         	 //j = jeu.getJoueur();
         	 switch (joueur) {
