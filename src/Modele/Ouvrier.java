@@ -1,6 +1,8 @@
 package Modele;
 
 public class Ouvrier {
+	
+	
 
 	private int nombre;
 
