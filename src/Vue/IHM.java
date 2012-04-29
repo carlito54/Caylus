@@ -1,5 +1,6 @@
 package Vue;
 
+import Modele.Batiments.Ecurie;
 import Modele.*;
 import Modele.Batiments.Auberge;
 import Modele.Batiments.BatimentSpeciaux;

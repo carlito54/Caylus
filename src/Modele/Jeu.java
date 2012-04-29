@@ -1,5 +1,6 @@
 package Modele;
 
+import Modele.Batiments.Ecurie;
 import Modele.Batiments.Auberge;
 import Modele.Batiments.BatimentProduction;
 import Modele.Batiments.Chateau;
@@ -349,7 +350,7 @@ public class Jeu {
         Joueur j;
         for (int i = 0; i < ordreTour.size(); i++) {
             j = ordreTour.get(i);
-            if (!ecurie.contains(j));
+            if (!ecurie.contains(j)); 
             ecurie.add(j);
         }
         return ecurie;
