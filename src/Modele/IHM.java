@@ -1,6 +1,7 @@
 package Modele;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -31,12 +32,38 @@ public class IHM {
 	private JFormattedTextField jt;
 	private String[] neutre; 
 	private ImagePanel imp;
-	
+	private HashMap<Integer,ImagePanel> jtab;
+	private int place;
+	private boolean stop;
+	private int ordreTour;
 	private Jeu jeu;
+	private ImageList imageList;
+	private boolean aDroit;
+	
 	
 	public IHM(){
 		jf = new JFrame();
 		jp = new JPanel();
+		ordreTour = 0;
+		HashMap<String, Image> ouvrierList = new HashMap<String, Image>();
+		ouvrierList.put("Joueur1", Toolkit.getDefaultToolkit().getImage("Images/ouvrierrouge.jpg"));
+		ouvrierList.put("Joueur2", Toolkit.getDefaultToolkit().getImage("Images/ouvrierbleu.jpg"));
+		ouvrierList.put("Joueur3", Toolkit.getDefaultToolkit().getImage("Images/ouvrierorange.jpg"));
+		ouvrierList.put("Joueur4", Toolkit.getDefaultToolkit().getImage("Images/ouvriervert.jpg"));
+		ouvrierList.put("Joueur5", Toolkit.getDefaultToolkit().getImage("Images/ouvriernoir.jpg"));
+		HashMap<String, Image> maisonList = new HashMap<String, Image>();
+		maisonList.put("Joueur1", Toolkit.getDefaultToolkit().getImage("Images/maisonrouge.jpg"));
+		maisonList.put("Joueur2", Toolkit.getDefaultToolkit().getImage("Images/maisonbleu.jpg"));
+		maisonList.put("Joueur3", Toolkit.getDefaultToolkit().getImage("Images/maisonorange.jpg"));
+		maisonList.put("Joueur4", Toolkit.getDefaultToolkit().getImage("Images/maisonvert.jpg"));
+		maisonList.put("Joueur5", Toolkit.getDefaultToolkit().getImage("Images/maisonnoir.jpg"));
+		HashMap<String, Image> marqueurList = new HashMap<String, Image>();
+		marqueurList.put("Joueur1", Toolkit.getDefaultToolkit().getImage("Images/marqueurrouge.jpg"));
+		marqueurList.put("Joueur2", Toolkit.getDefaultToolkit().getImage("Images/marqueurbleu.jpg"));
+		marqueurList.put("Joueur3", Toolkit.getDefaultToolkit().getImage("Images/marqueurorange.jpg"));
+		marqueurList.put("Joueur4", Toolkit.getDefaultToolkit().getImage("Images/marqueurvert.jpg"));
+		marqueurList.put("Joueur5", Toolkit.getDefaultToolkit().getImage("Images/marqueurnoir.jpg"));
+		imageList = new ImageList(ouvrierList, maisonList, marqueurList);
 		HashMap<Integer, Batiment> listeBatiment = new HashMap<Integer, Batiment>();
 		jeu = new Jeu(14, 14, listeBatiment);
 		jf.setTitle("Caylus");
@@ -54,10 +81,13 @@ public class IHM {
 		JLabel jl = new JLabel("Combien de joueurs (1 à 5)? : ");
 		jt = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		jt.setPreferredSize(new Dimension(20,20));
+		
 		JButton jb = new JButton("Valider");
+		jt.requestFocus();
+		jt.requestFocusInWindow();
 		jp.add(jl);
 		jp.add(jt);
-		jp.add(jb,BorderLayout.SOUTH);
+		jp.add(jb);
 
 		jf.add(jp);	
 		
@@ -71,17 +101,47 @@ public class IHM {
           */
          public void actionPerformed(ActionEvent arg0) {
         	 Coordonnee[] coord = jeu.getCoord();
-        	 if(Integer.parseInt(jt.getText())>0 && Integer.parseInt(jt.getText())<6){
+        	 if(Integer.parseInt(jt.getText())>1 && Integer.parseInt(jt.getText())<6){
 	    		Image image = Toolkit.getDefaultToolkit().getImage("Images/3070_1.jpg");
-	    		imp = new ImagePanel(image);
+	    		imp = new ImagePanel(image,630,710);
 	    		imp.setLayout(null);
 	    		jf.remove(jp);
-	    		jf.setSize(650,750);
+	    		jf.setSize(650,766);
 	 			JPanel jp1 = new JPanel();
-				Image imagetest = Toolkit.getDefaultToolkit().getImage("Images/Alchimiste.jpg");
-				ImagePanel imptest = new ImagePanel();
-				imptest.setPreferredSize(new Dimension(60,50));
+	 			jtab = new HashMap<Integer,ImagePanel>();
+	 			for(int i = 14;i<36;i++){
+	 				ImagePanel imp1 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),20,20);
+	 				imp1.setLayout(null);
+	 				imp1.setBounds(jeu.getCoord()[i].getX(), jeu.getCoord()[i].getY(), 15, 15);
+	 				jtab.put(((i-4)*5+2), imp1);
+	 				ImagePanel imp2 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),20,20);
+	 				imp2.setPreferredSize(new Dimension(20, 20));
+	 				imp2.setLayout(null);
+	 				imp2.setBounds(jeu.getCoord()[i].getX()+55, jeu.getCoord()[i].getY(), 15, 15);
+	 				jtab.put(((i-4)*5+3), imp2);
+	 				ImagePanel imp3 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),20,20);
+	 				imp3.setLayout(null);
+	 				imp3.setBounds(jeu.getCoord()[i].getX(), jeu.getCoord()[i].getY()+35, 15, 15);
+	 				jtab.put(((i-4)*5+4), imp3);
+	 				ImagePanel imp4 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),20,20);
+	 				imp4.setLayout(null);
+	 				imp4.setBounds(jeu.getCoord()[i].getX()+55, jeu.getCoord()[i].getY()+35, 15, 15);
+	 				jtab.put(((i-4)*5+5), imp4);
+	 				ImagePanel imp5 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("ini.png"),70,50);
+	 				imp5.setLayout(null);
+	 				imp5.setBounds(jeu.getCoord()[i].getX(), jeu.getCoord()[i].getY(), 70, 50);
+	 				jtab.put(((i-4)*5+6), imp5);
+	 				imp5.add(imp1);
+ 					imp5.add(imp2);
+ 					imp5.add(imp3);
+ 					imp5.add(imp4);
+ 					jp.add(imp5);
+	 			}
+				Image imagetest = Toolkit.getDefaultToolkit().getImage("Images/prevot.jpg");
+				ImagePanel imptest = new ImagePanel(imagetest,20,20);
 				imptest.setImage(imagetest);
+				//imptest.setSize(new Dimension(160,150));
+				
 				imptest.setLayout(null);
 				imptest.setBounds(123, 626, 70, 50);
 				// imp.setSize(500,500);
@@ -89,70 +149,88 @@ public class IHM {
 				 
 				imp.add(imptest);
        			
-       			jeu.setJoueur(initialisationPlateau(Integer.parseInt(jt.getText())));
+       			jeu.setJoueur(initialisationJoueur(Integer.parseInt(jt.getText())));
+       			jeu.setOrdreTour(initialisationJoueur(Integer.parseInt(jt.getText())));
        			initBatiment();
        			ArrayList<Integer> choixBatNeutre = jeu.batNeutreRamdom();
        			
-       			imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(0)]);
-				ImagePanel jp8 = new ImagePanel();
-				jp8.setPreferredSize(new Dimension(60,50));
-				jp8.setImage(imagetest);
-				jp8.setLayout(null);
-				jp8.setBounds(coord[8].getX(), coord[8].getY(), 70, 50);
-				imp.add(jp8);
-				jeu.ajoutNeutre(choixBatNeutre.get(0),8);
-				
-       			imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(1)]);
-				ImagePanel jp9 = new ImagePanel();
-				jp9.setPreferredSize(new Dimension(60,50));
-				jp9.setImage(imagetest);
-				jp9.setLayout(null);
-				jp9.setBounds(coord[9].getX(), coord[9].getY(), 70, 50);
-				imp.add(jp9);
-				jeu.ajoutNeutre(choixBatNeutre.get(1),9);
-				
-       			imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(2)]);
-       			ImagePanel jp10 = new ImagePanel();
-       			jp10.setPreferredSize(new Dimension(60,50));
-       			jp10.setImage(imagetest);
-       			jp10.setLayout(null);
-       			jp10.setBounds(coord[10].getX(), coord[10].getY(), 70, 50);
-				imp.add(jp10);
-				jeu.ajoutNeutre(choixBatNeutre.get(2),10);
-				
-       			imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(3)]);
-       			ImagePanel jp11 = new ImagePanel();
-       			jp11.setPreferredSize(new Dimension(60,50));
-       			jp11.setImage(imagetest);
-       			jp11.setLayout(null);
-       			jp11.setBounds(coord[11].getX(), coord[11].getY(), 70, 50);
-				imp.add(jp11);
-				jeu.ajoutNeutre(choixBatNeutre.get(3),11);
-       			
-       			imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(4)]);
-       			ImagePanel jp12 = new ImagePanel();
-       			jp12.setPreferredSize(new Dimension(60,50));
-       			jp12.setImage(imagetest);
-       			jp12.setLayout(null);
-       			jp12.setBounds(coord[12].getX(), coord[12].getY(), 70, 50);
-				imp.add(jp12);
-				jeu.ajoutNeutre(choixBatNeutre.get(4),12);
-       			
-       			imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(5)]);
-       			ImagePanel jp13 = new ImagePanel();
-       			jp13.setPreferredSize(new Dimension(60,50));
-       			jp13.setImage(imagetest);
-       			jp13.setLayout(null);
-				jp13.setBounds(coord[13].getX(), coord[13].getY(), 70, 50);
-				imp.add(jp13);
-				jeu.ajoutNeutre(choixBatNeutre.get(5),13);
+       			initialisationPlateau(choixBatNeutre, 8, 0);
+       			initialisationPlateau(choixBatNeutre, 9, 1);
+       			initialisationPlateau(choixBatNeutre, 10, 2);
+       			initialisationPlateau(choixBatNeutre, 11, 3);
+       			initialisationPlateau(choixBatNeutre, 12, 4);
+       			initialisationPlateau(choixBatNeutre, 13, 5);
+
        			jf.add(imp);
+       			stop = false;
+       			jf.addMouseListener(new MouseListener() {
+					public void mouseReleased(MouseEvent e) {}
+					public void mousePressed(MouseEvent e) {}
+					public void mouseExited(MouseEvent e) {}
+					public void mouseEntered(MouseEvent e) {}
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch (jeu.getPhase()) {
+						case 2:
+							Joueur j =jeu.getOrdreTour().get(ordreTour);
+							int pos = jeu.retournePosition(e.getX(), e.getY());
+							System.out.println("est ce que ça marche?" + pos);
+							if(pos != -1){
+								placerOuvrier(pos);
+							}
+							
+							jf.repaint();
+							break;
+
+						default:
+							break;
+						}
+					
+					}
+				});
         	 }else{
         		 JOptionPane.showMessageDialog(jp,"Le nombre de joueur est incorrect");
         	 }
          }
 
-         public ArrayList<Joueur> initialisationPlateau(int joueur){
+         public void initialisationPlateau(ArrayList<Integer> choixBatNeutre, int pos, int emplacement){
+        	 	Coordonnee[] coord = jeu.getCoord();
+        	 	Image imagetest = Toolkit.getDefaultToolkit().getImage(neutre[choixBatNeutre.get(emplacement)]);
+				ImagePanel jp8 = new ImagePanel(imagetest,70,50);
+				jp8.setPreferredSize(new Dimension(60,50));
+				jp8.setImage(imagetest);
+				jp8.setLayout(null);
+				jp8.setBounds(coord[pos].getX(), coord[pos].getY(), 70, 50);
+				jtab.put(((pos-4)*5)+3,jp8);
+				
+				ImagePanel imp1 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),15,15);
+				imp1.setLayout(null);
+				imp1.setBounds(jeu.getCoord()[pos].getX(), jeu.getCoord()[pos].getY(), 15, 15);
+				jtab.put(((pos-4)*5)+3, imp1);
+				imp.add(imp1);
+				
+				ImagePanel imp2 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),15,15);
+				imp2.setLayout(null);
+				imp2.setBounds(jeu.getCoord()[pos].getX()+55, jeu.getCoord()[pos].getY(), 15, 15);
+				jtab.put(((pos-4)*5)+4, imp2);
+				imp.add(imp2);
+				
+				ImagePanel imp3 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),15,15);
+				imp3.setLayout(null);
+				imp3.setBounds(jeu.getCoord()[pos].getX(), jeu.getCoord()[pos].getY()+35, 15, 15);
+				jtab.put(((pos-4)*5)+5,imp3);
+				imp.add(imp3);
+				
+ 				ImagePanel imp4 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),15,15);
+ 				imp4.setLayout(null);
+ 				imp4.setBounds(jeu.getCoord()[pos].getX()+55, jeu.getCoord()[pos].getY()+35, 15, 15);
+ 				jtab.put(((pos-4)*5)+6, imp4);
+ 				imp.add(imp4);
+ 				imp.add(jp8);
+				jeu.ajoutNeutre(choixBatNeutre.get(0),pos);
+         }
+         
+         public ArrayList<Joueur> initialisationJoueur(int joueur){
         	 
         	 Joueur j1 = new Joueur("Joueur1", 0, 0, new Ressource(0,0,0,0,0));
         	 Joueur j2 = new Joueur("Joueur2", 0, 0, new Ressource(0,0,0,0,0));
@@ -162,13 +240,10 @@ public class IHM {
         	 ArrayList<Joueur> j = new ArrayList<Joueur>();
         	 //j = jeu.getJoueur();
         	 switch (joueur) {
-        	 	case 1:
-        	 		j.add(j1);
-        	 		//ArrayList<String> j = new ArrayList() {{ add("nom1"); add("nom2"); add("nom3) }};
-        	 		break;
         	 	case 2:
         	 		j.add(j1);
         	 		j.add(j2);
+        	 		
         	 		break;
         	 	case 3:
         	 		j.add(j1);
@@ -198,18 +273,38 @@ public class IHM {
         	 
          }
          
-         public void placerOuvrier(){
-        	 imp.addMouseListener(new MouseListener() {
-				public void mouseReleased(MouseEvent arg0) {}
-				public void mousePressed(MouseEvent arg0) {}				
-				public void mouseExited(MouseEvent arg0) {}			
-				public void mouseEntered(MouseEvent arg0) {}
-				public void mouseClicked(MouseEvent arg0) {
-					
-				}
-			});
+         public void placerOuvrier(int pos){
         	 
-         }
+        	 System.out.println("positionnnnnnnnnnnnnnn"+(((pos-4)*5)+3));
+        	 Joueur j = jeu.placerOuvrier(pos);
+        	 System.out.println(j.getNom() + pos);
+        	 if(jeu.isaDroit()){
+        	
+	        	 if(j.getNom() == "Joueur1"){
+	        		 jtab.get(((pos-4)*5)+3).setImage(Toolkit.getDefaultToolkit().getImage("Images/ouvrierrouge.jpg"),20,20);
+	        	 }else{
+	        		 if(j.getNom() == "Joueur2"){
+	            		 jtab.get(((pos-4)*5)+3).setImage(Toolkit.getDefaultToolkit().getImage("Images/ouvrierbleu.jpg"),20,20);
+	            	 }else{
+	            		 if(j.getNom() == "Joueur3"){
+	                		 jtab.get(((pos-4)*5)+3).setImage(Toolkit.getDefaultToolkit().getImage("Images/ouvrierorange.jpg"),20,20);
+	                	 }else{
+	                		 if(j.getNom() == "Joueur4"){
+	                    		 jtab.get(((pos-4)*5)+3).setImage(Toolkit.getDefaultToolkit().getImage("Images/ouvriervert.jpg"),20,20);
+	                    	 }else{
+	                    		 jtab.get(((pos-4)*5)+3).setImage(Toolkit.getDefaultToolkit().getImage("Images/ouvriernoir.jpg"),20,20);
+	                    	 }
+	                	 }
+	            	 }
+	        	 }
+	        }
+        	 jf.repaint();
+        	 
+        	 jf.repaint();
+		}
+
+         
+         
          
          public void initBatiment(){
         	 jeu.getRevenu();
@@ -227,8 +322,142 @@ public class IHM {
         	 jeu.getListeBatiment().put(5, ecurie);
         	 Auberge auberge = new Auberge("Auberge", 6);
         	 jeu.getListeBatiment().put(6, auberge);
+        	 Pont pont = new Pont("pont", 7);
+        	 jeu.getListeBatiment().put(7, pont);
          }        
 	 }
+	 
+	 
+	public JFrame getJf() {
+		return jf;
+	}
+
+
+	public void setJf(JFrame jf) {
+		this.jf = jf;
+	}
+
+
+	public JPanel getJp() {
+		return jp;
+	}
+
+
+	public void setJp(JPanel jp) {
+		this.jp = jp;
+	}
+
+
+	public JFormattedTextField getJt() {
+		return jt;
+	}
+
+
+	public void setJt(JFormattedTextField jt) {
+		this.jt = jt;
+	}
+
+
+	public String[] getNeutre() {
+		return neutre;
+	}
+
+
+	public void setNeutre(String[] neutre) {
+		this.neutre = neutre;
+	}
+
+
+	public ImagePanel getImp() {
+		return imp;
+	}
+
+
+	public void setImp(ImagePanel imp) {
+		this.imp = imp;
+	}
+
+
+//	public ArrayList<ImagePanel> getJtab() {
+//		return jtab;
+//	}
+//
+//
+//	public void setJtab(ArrayList<ImagePanel> jtab) {
+//		this.jtab = jtab;
+//	}
+
+
+	HashMap<Integer, ImagePanel> getJtab() {
+		return jtab;
+	}
+
+
+	void setJtab(HashMap<Integer, ImagePanel> jtab) {
+		this.jtab = jtab;
+	}
+
+
+	int getPlace() {
+		return place;
+	}
+
+
+	void setPlace(int place) {
+		this.place = place;
+	}
+
+
+	boolean isStop() {
+		return stop;
+	}
+
+
+	void setStop(boolean stop) {
+		this.stop = stop;
+	}
+
+
+	int getOrdreTour() {
+		return ordreTour;
+	}
+
+
+	void setOrdreTour(int ordreTour) {
+		this.ordreTour = ordreTour;
+	}
+
+
+	ImageList getImageList() {
+		return imageList;
+	}
+
+
+	void setImageList(ImageList imageList) {
+		this.imageList = imageList;
+	}
+
+
+	boolean isaDroit() {
+		return aDroit;
+	}
+
+
+	void setaDroit(boolean aDroit) {
+		this.aDroit = aDroit;
+	}
+
+
+	public Jeu getJeu() {
+		return jeu;
+	}
+
+
+	public void setJeu(Jeu jeu) {
+		this.jeu = jeu;
+	}
+
+
 	public static void main(String[] args){
 		
 		IHM affichage = new IHM();

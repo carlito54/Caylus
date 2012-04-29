@@ -1,10 +1,19 @@
 package Modele;
 
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.swing.JPanel;
 
 public class Jeu {
 	
@@ -14,9 +23,15 @@ public class Jeu {
 	private int prevot;
 	private int baili;
 	private Coordonnee[] coord;
-
+	private Joueur j;
 	private Auberge auberge;
 	private HashMap<Integer, Batiment> listeBatiment;
+	private ArrayList<ImagePanel> jtab;
+	private boolean positionner = false;
+	private int place;
+	private int phase;
+	private int tour;
+	private boolean aDroit;
 	
 	
 	public Jeu(int prevot, int baili, HashMap<Integer, Batiment> listeBatiment) {
@@ -27,6 +42,7 @@ public class Jeu {
 		this.baili = baili;
 		this.listeBatiment = listeBatiment;
 		this.auberge = new Auberge("Auberge", 7);
+		this.tour = 0;
 		coord = new Coordonnee[36];
 		coord[8] = new Coordonnee(140, 250);
 		coord[9] = new Coordonnee(65, 275);
@@ -65,10 +81,12 @@ public class Jeu {
 		int i = 0;
 		boolean trouve = false;
 		Batiment res = null;
-		while(!trouve || i<listeBatiment.size()){
-			if (listeBatiment.get(i).getPosition()==pos){
+		while(!trouve){
+			System.out.println(listeBatiment.get(i).getPosition());
+			if (listeBatiment.get(i).getPosition()==pos  || (i==listeBatiment.size())){
 				trouve = true;
 				res = listeBatiment.get(i);
+				System.out.println("ffffffff");
 			}else{
 				i++;
 			}
@@ -79,6 +97,7 @@ public class Jeu {
 	public Joueur batimentOccupe(int pos){
 		Joueur res = null;
 		Batiment bat = getBatiment(pos);
+		System.out.println("lllllll");
 		if (bat != null){
 			if(bat.isOccupe()){
 				res = bat.getPresent();
@@ -110,6 +129,7 @@ public class Jeu {
 				}
 			}
 		}
+		phase = 2;
 	}
 	
 	public void payer(Joueur j){
@@ -121,46 +141,89 @@ public class Jeu {
 		}
 	}
 	
-	public void placerOuvrier(){	
+	public int retournePosition(int x, int y){
+		int res = -1;
+		for (int i = 8;i<36;i++){
+			System.out.println("test de la fonction retourne posisition : ");
+			System.out.println("i : "+i);
+			System.out.println("x :"+x);
+			System.out.println("y : "+y);
+			System.out.println(coord[i].getX()+10);
+			System.out.println(coord[i].getX()+80);
+			System.out.println(coord[i].getY()+80);
+			System.out.println(coord[i].getY()+30);
+			if((x <= coord[i].getX()+80) && (x >= coord[i].getX()+10) && (y<=coord[i].getY()+80) && (y >= coord[i].getY()+30)){
+
+				
+				System.out.println("voilà le resusltat" + i);
+				res = i;
+				break;
+				
+			}
+		}
+		return res;
+	}
+	
+	public Joueur placerOuvrier(int place){	
 		int fin = 0;
-		int i = 0; 
 		int pos = 0;
-		Joueur j;
+		boolean stop = false;
 		Batiment bat;
-		while (ordreTour.size() != 0){
-			// il faudra recuperer le batiment grâce au clique 
-			bat = getBatiment(pos);
-			j = ordreTour.get(i);
+		System.out.println("test2");
+			bat = getBatiment(place);
+			System.out.println(bat.getNom());
+			System.out.println("-----------"+tour);
+			j = ordreTour.get(tour);
 			if(bat.getNom() == "pont"){
+				System.out.println("test4");
 				fileFinPose.add(j); 
-				fileFinPose.add(j);
+				if(fileFinPose.size() == ordreTour.size()){
+					phase ++;
+				}
 				fin ++;
 			}else{
 				if(!bat.isOccupe()){
+					aDroit = true;
+					System.out.println("test555555");
+					tour++;
 					if(bat.getProprio() == j){
+						System.out.println("test6");
 						bat.setOccupe(true);
 						payer(j);
 						bat.setPresent(j);
 					}else{
 						if(bat.getProprio() != j && bat.getProprio() != null){
+							System.out.println("test7");
 							bat.setOccupe(true);
+							j.setNbDenier(-1);
 							payer(j);
 							bat.setPresent(j);
 							bat.getProprio().setNbPrestige(1);
 						}else{
+							if(bat.getProprio() == null){
+								System.out.println("test00000");
+								bat.setOccupe(true);
+								payer(j);
+								bat.setPresent(j);
+								//bat.getProprio().setNbPrestige(1);
+							}else{
 							if( bat instanceof Auberge){
+								System.out.println("test8");
 								((Auberge) bat).next(j);
 								payer(j);
 							}else{
 								if(bat instanceof Ecurie){
+									System.out.println("test9");
 									((Ecurie) bat).next(j);
 									payer(j);
 								}else{
 									if(bat instanceof Chateau){
+										System.out.println("test99");
 										if(!((Chateau) bat).getOrdreConst().contains(j)){
 											((Chateau) bat).getOrdreConst().add(j);
 											payer(j);
 										}else{
+											System.out.println("test999");
 											bat.setOccupe(true);
 											bat.setPresent(j);
 											payer(j);
@@ -171,15 +234,94 @@ public class Jeu {
 						}
 					}
 				}
-			}
-			if(j.getOuvrier().getNombre() == 0){
-				ordreTour.remove(j);
-				fileFinPose.add(j);
-			}
-			if(i == ordreTour.size() - 1);
-				i = 0;
-		}
+					System.out.println("test3");
+					if(j.getOuvrier().getNombre() == 0){
+						//ordreTour.remove(j);
+						fileFinPose.add(j);
+						if(fileFinPose.size() == ordreTour.size()){
+							phase = 3;
+						}
+					}
+					System.out.println(tour);
+					System.out.println(ordreTour.size());
+					System.out.println("test tour");
+					if(tour == ordreTour.size()){
+
+						tour = 0;
+					}
+				}else{
+					aDroit = false;
+				}
+				}
+				
+	
+		return j;
 	}
+	
+	public void setOuvrier(int place, Joueur j, ArrayList<ImagePanel> jtab){
+   	 Image imagetest; 
+   	 ImagePanel ip= jtab.get(place);
+   	 Coordonnee[] coord = getCoord();
+   	 if(j.getNom() == "Joueur 1" ){
+   		 imagetest = Toolkit.getDefaultToolkit().getImage("ouvrierrouge.jpg");
+   	 }else{
+   		 if(j.getNom() == "Joueur 2" ){
+       		 imagetest = Toolkit.getDefaultToolkit().getImage("ouvrierbleu.jpg");
+       	 }else{
+       		 if(j.getNom() == "Joueur 3" ){
+           		 imagetest = Toolkit.getDefaultToolkit().getImage("ouvrierorange.jpg");
+           	 }else{
+           		 if(j.getNom() == "Joueur 4" ){
+               		 imagetest = Toolkit.getDefaultToolkit().getImage("ouvriervert.jpg");
+               	 }else{
+               		 imagetest = Toolkit.getDefaultToolkit().getImage("ouvriernoir.jpg");
+               	 }
+           	 }
+       	 }
+   	 }
+   	 
+   	 switch (place) {
+		case 1:
+			ip.setImage(imagetest,15,15);
+			ip.setPreferredSize(new Dimension(60,50));
+			ip.setImage(imagetest);
+			ip.setLayout(null);
+			ip.setBounds(coord[1].getX(), coord[1].getY(), 70, 50);
+			
+			break;
+		case 2:
+			
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			
+			break;
+		case 5:
+			
+			break;
+		case 6:
+			
+			break;
+		case 7:
+			
+			break;
+		case 8:
+			
+			break;
+		case 9:
+			
+			break;	
+		case 10:
+			
+			break;
+
+		default:
+			break;
+		}
+    }
+
 	
 	public void activationPorte(Joueur j){
 		
@@ -252,27 +394,21 @@ public class Jeu {
 		switch (i) {
 		case 0:
 			listeBatiment.put(place, new BatimentProduction("Bois1", place, new Ressource(0,0,0,0,0)));
-			System.out.println("placement de : "+place);
 			break;
 		case 1:
 			listeBatiment.put(place, new BatimentProduction("Pierre1", place, new Ressource(0,0,0,0,0)));
-			System.out.println("placement de : "+place);
 			break;
 		case 2:
 			listeBatiment.put(place, new BatimentProduction("BoisNourriture1", place, new Ressource(0,0,0,0,0)));
-			System.out.println("placement de : "+place);
 			break;
 		case 3:
 			listeBatiment.put(place, new BatimentProduction("CharpentierNeutre", place, new Ressource(0,0,0,0,0)));
-			System.out.println("placement de : "+place);
 			break;
 		case 4:
 			listeBatiment.put(place, new BatimentProduction("Marche1", place, new Ressource(0,0,0,0,0)));
-			System.out.println("placement de : "+place);
 			break;
 		case 5:
 			listeBatiment.put(place, new BatimentProduction("Nourriture1", place, new Ressource(0,0,0,0,0)));
-			System.out.println("placement de : "+place);
 			break;
 		default:
 			break;
@@ -330,5 +466,102 @@ public class Jeu {
 	public void setBaili(int baili) {
 		this.baili = baili;
 	}
+
+
+
+	Joueur getJ() {
+		return j;
+	}
+
+
+
+	int getTour() {
+		return tour;
+	}
+
+
+
+	void setTour(int tour) {
+		this.tour = tour;
+	}
+
+
+
+	boolean isaDroit() {
+		return aDroit;
+	}
+
+
+
+	void setaDroit(boolean aDroit) {
+		this.aDroit = aDroit;
+	}
+
+
+
+	void setJ(Joueur j) {
+		this.j = j;
+	}
+
+
+
+	Auberge getAuberge() {
+		return auberge;
+	}
+
+
+
+	void setAuberge(Auberge auberge) {
+		this.auberge = auberge;
+	}
+
+
+
+	ArrayList<ImagePanel> getJtab() {
+		return jtab;
+	}
+
+
+
+	void setJtab(ArrayList<ImagePanel> jtab) {
+		this.jtab = jtab;
+	}
+
+
+
+	boolean isPositionner() {
+		return positionner;
+	}
+
+
+
+	void setPositionner(boolean positionner) {
+		this.positionner = positionner;
+	}
+
+
+
+	int getPlace() {
+		return place;
+	}
+
+
+
+	void setPlace(int place) {
+		this.place = place;
+	}
+
+
+
+	int getPhase() {
+		return phase;
+	}
+
+
+
+	void setPhase(int phase) {
+		this.phase = phase;
+	}
+
 
 }

@@ -21,8 +21,8 @@ public class Joueur {
 		return ouvrier;
 	}
 
-	public void setOuvrier(Ouvrier ouvrier) {
-		this.ouvrier = ouvrier;
+	public void setOuvrier(int i) {
+		this.ouvrier.setNombre(i);
 	}
 
 	public String getNom() {

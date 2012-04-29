@@ -1,6 +1,8 @@
 package Modele;
 
-public class Batiment {
+import java.awt.Image;
+
+public class Batiment extends ImagePanel{
 
 	private String nom;
 	private Joueur proprio;
@@ -9,7 +11,24 @@ public class Batiment {
 	private int position;
 	
 
-	
+    public Batiment(Image image,String nom, int position) {
+		super(image);
+		this.nom = nom;
+		this.proprio = null;
+		this.present = null;
+		this.occupe = false;
+		this.position = position;
+    }
+    
+    public Batiment(Image image, int w, int h) {
+        super(image,w,h);
+		this.nom = nom;
+		this.proprio = null;
+		this.present = null;
+		this.occupe = false;
+		this.position = position;
+
+    }
 	public Batiment(String nom, int position) {
 		super();
 		this.nom = nom;
