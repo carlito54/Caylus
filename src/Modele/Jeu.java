@@ -198,13 +198,13 @@ public class Jeu {
 	public void activeJoute(Joueur j){
 		j.setNbDenier(-1);
 		Ressource ress = j.getRessource();
-		if(ress.getTissu() > 2){
-			ress.setTissu(-3);
+		if(ress.getRessource("Tissu") > 2){
+			ress.setRessource("Tissu", -3);
 		}
 	}
 	
 	public ArrayList<Joueur> activeEcurie(Ecurie e){
-		ArrayList<Joueur> ecurie = new ArrayList<Joueur>();
+		ArrayList<Joueur> ecurie = new ArrayList<>();
 		ecurie.add(e.getPlace1());
 		if(e.getPlace2() !=null){
 			ecurie.add(e.getPlace2());
@@ -212,9 +212,8 @@ public class Jeu {
 				ecurie.add(e.getPlace3());
 			}
 		}
-		int i = 0;
 		Joueur j;
-		for(i=0;i<ordreTour.size();i++){
+		for(int i=0;i<ordreTour.size();i++){
 			j = ordreTour.get(i);
 			if(!ecurie.contains(j));
 				ecurie.add(j);
@@ -250,27 +249,27 @@ public class Jeu {
 	public void ajoutNeutre(int i, int place){
 		switch (i) {
 		case 0:
-			listeBatiment.put(place, new BatimentProduction("Bois1", place, new Ressource(0,0,0,0,0)));
+			listeBatiment.put(place, new BatimentProduction("Bois1", place, new Ressource()));
 			System.out.println("placement de : "+place);
 			break;
 		case 1:
-			listeBatiment.put(place, new BatimentProduction("Pierre1", place, new Ressource(0,0,0,0,0)));
+			listeBatiment.put(place, new BatimentProduction("Pierre1", place, new Ressource()));
 			System.out.println("placement de : "+place);
 			break;
 		case 2:
-			listeBatiment.put(place, new BatimentProduction("BoisNourriture1", place, new Ressource(0,0,0,0,0)));
+			listeBatiment.put(place, new BatimentProduction("BoisNourriture1", place, new Ressource()));
 			System.out.println("placement de : "+place);
 			break;
 		case 3:
-			listeBatiment.put(place, new BatimentProduction("CharpentierNeutre", place, new Ressource(0,0,0,0,0)));
+			listeBatiment.put(place, new BatimentProduction("CharpentierNeutre", place, new Ressource()));
 			System.out.println("placement de : "+place);
 			break;
 		case 4:
-			listeBatiment.put(place, new BatimentProduction("Marche1", place, new Ressource(0,0,0,0,0)));
+			listeBatiment.put(place, new BatimentProduction("Marche1", place, new Ressource()));
 			System.out.println("placement de : "+place);
 			break;
 		case 5:
-			listeBatiment.put(place, new BatimentProduction("Nourriture1", place, new Ressource(0,0,0,0,0)));
+			listeBatiment.put(place, new BatimentProduction("Nourriture1", place, new Ressource()));
 			System.out.println("placement de : "+place);
 			break;
 		default:
