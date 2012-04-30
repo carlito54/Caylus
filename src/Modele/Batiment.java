@@ -23,7 +23,7 @@ public class Batiment extends ImagePanel {
     }
     
     public Batiment(Image image, int w, int h) {
-        super(image,w,h);
+        super(image);
 		this.nom = nom;
 		this.proprio = null;
 		this.present = null;
@@ -32,13 +32,12 @@ public class Batiment extends ImagePanel {
 
     }
 	public Batiment(String nom, int position) {
-		super();
+		super("Images/ini.png");
 		this.nom = nom;
 		this.proprio = null;
 		this.present = null;
 		this.occupe = false;
 		this.position = position;
-		
 	}
 	
 	

@@ -4,6 +4,7 @@
  */
 package Vue;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -19,6 +20,13 @@ public class Fenetre extends JFrame {
         this.pack();
         this.setVisible(true);
         this.setResizable(false);
+    }
+    
+    public void affichePlateau() {
+        this.setContentPane(new Plateau());
+        //this.setPreferredSize(new Dimension(505, 695));
+        this.pack();
+        this.setVisible(true);
     }
 
     public static void main(String[] args) {

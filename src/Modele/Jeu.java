@@ -22,7 +22,6 @@ public class Jeu {
     private Joueur j;
     private Auberge auberge;
     private HashMap<Integer, Batiment> listeBatiment;
-    private ArrayList<ImagePanel> jtab;
     private boolean positionner = false;
     private int place;
     private int phase;
@@ -30,13 +29,11 @@ public class Jeu {
     private boolean aDroit;
 
     public Jeu(int prevot, int baili, HashMap<Integer, Batiment> listeBatiment) {
-        super();
         this.fileFinPose = new ArrayList<>();
         this.ordreTour = new ArrayList<>();
         this.prevot = prevot;
         this.baili = baili;
         this.listeBatiment = listeBatiment;
-        this.auberge = new Auberge("Auberge", 7);
         this.tour = 0;
         coord = new Coordonnee[36];
         coord[8] = new Coordonnee(140, 250);
@@ -252,70 +249,6 @@ public class Jeu {
         return j;
     }
 
-    public void setOuvrier(int place, Joueur j, ArrayList<ImagePanel> jtab) {
-        Image imagetest;
-        ImagePanel ip = jtab.get(place);
-        Coordonnee[] coord = getCoord();
-        if (j.getNom() == "Joueur 1") {
-            imagetest = Toolkit.getDefaultToolkit().getImage("ouvrierrouge.jpg");
-        } else {
-            if (j.getNom() == "Joueur 2") {
-                imagetest = Toolkit.getDefaultToolkit().getImage("ouvrierbleu.jpg");
-            } else {
-                if (j.getNom() == "Joueur 3") {
-                    imagetest = Toolkit.getDefaultToolkit().getImage("ouvrierorange.jpg");
-                } else {
-                    if (j.getNom() == "Joueur 4") {
-                        imagetest = Toolkit.getDefaultToolkit().getImage("ouvriervert.jpg");
-                    } else {
-                        imagetest = Toolkit.getDefaultToolkit().getImage("ouvriernoir.jpg");
-                    }
-                }
-            }
-        }
-
-        switch (place) {
-            case 1:
-                ip.setImage(imagetest, 15, 15);
-                ip.setPreferredSize(new Dimension(60, 50));
-                ip.setImage(imagetest);
-                ip.setLayout(null);
-                ip.setBounds(coord[1].getX(), coord[1].getY(), 70, 50);
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-            case 5:
-
-                break;
-            case 6:
-
-                break;
-            case 7:
-
-                break;
-            case 8:
-
-                break;
-            case 9:
-
-                break;
-            case 10:
-
-                break;
-
-            default:
-                break;
-        }
-    }
-
     public void activationPorte(Joueur j) {
     }
 
@@ -498,14 +431,6 @@ public class Jeu {
 
     public void setAuberge(Auberge auberge) {
         this.auberge = auberge;
-    }
-
-    public ArrayList<ImagePanel> getJtab() {
-        return jtab;
-    }
-
-    public void setJtab(ArrayList<ImagePanel> jtab) {
-        this.jtab = jtab;
     }
 
     boolean isPositionner() {

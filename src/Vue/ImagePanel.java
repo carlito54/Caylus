@@ -1,63 +1,47 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Vue;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
-import javax.swing.*;
-import java.io.*;
- 
- 
-public class ImagePanel extends JPanel implements Serializable {
-    Image image = null;
-    int height;
-    int width;
-   
-    public ImagePanel(Image image) {
-        this.image = image;
+/**
+ *
+ * @author Loïc Cimon
+ */
+public class ImagePanel extends JPanel {
+
+    private Image img;
+
+    public ImagePanel(String img) {
+        this(new ImageIcon(img).getImage());
+    }
+
+    public ImagePanel(Image img) {
+        this.img = img;
+        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+        setPreferredSize(size);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setSize(size);
+        setLayout(null);
+    }
+
+    public void paintComponent(Graphics g) {
+        g.drawImage(img, 0, 0, null);
     }
     
-    public ImagePanel(Image image, int w, int h) {
-        this.image = image;
-        this.height = h;
-        this.width = w;
-        repaint();
-
-    }
-    public ImagePanel(int h, int w){
-        // this.image = image;
-         this.width = w;
-         this.height = h;
-
-     }
-    public ImagePanel() {
-       
-    }
-    public void setImage(Image image){
-        this.image = image;
-
-    }
-    public void setImage(Image image, int h, int w){
-        this.image = image;
-        this.width = w;
-        this.height = h;
+    public void setImage(String img) {
+        this.img = new ImageIcon(img).getImage();
         this.repaint();
     }
-
-   
-    public Image getImage(Image image){
-        return image;
+    
+    public Image getImage() {
+        return img;
     }
-   
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g); //paint background
-        if (image != null) { //there is a picture: draw it
-            //int height = this.getSize().height;
-            //int width = this.getSize().width;
-            //g.drawImage(image, 0, 0, this); //use image size       
-        	image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-            g.drawImage(image,0,0, width, height, null);
-        }
-    }
-
-	
 }

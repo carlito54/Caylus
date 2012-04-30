@@ -91,7 +91,7 @@ public class choixJoueurPanel extends javax.swing.JPanel {
        //Vérifie le nombre de joueur
         int nb = Integer.parseInt(nbJoueur.getText());
         if (nb >= NB_MIN && nb <= NB_MAX) {
-            this.getTopLevelAncestor();
+            ((Fenetre)this.getTopLevelAncestor()).affichePlateau();
         }
         else {
             JOptionPane.showMessageDialog(this.getTopLevelAncestor(), "Le nombre de joueur saisi est incorrect.\nIl doit être compris entre 2 et 5.", "Nombre de joueur incorrect", JOptionPane.ERROR_MESSAGE);
