@@ -1,9 +1,9 @@
 package Modele;
 
-import Modele.Batiments.Ecurie;
 import Modele.Batiments.Auberge;
 import Modele.Batiments.BatimentProduction;
 import Modele.Batiments.Chateau;
+import Modele.Batiments.Ecurie;
 import Vue.ImagePanel;
 import java.awt.Dimension;
 import java.awt.Image;

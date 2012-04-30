@@ -41,11 +41,5 @@ public class ImageList {
 
 	void setMarqueurList(HashMap<String, Image> marqueurList) {
 		this.marqueurList = marqueurList;
-	}
-	
-	
-	
-
-	
-	
+	}	
 }

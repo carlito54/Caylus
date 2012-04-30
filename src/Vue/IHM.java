@@ -7,7 +7,6 @@ import Modele.Batiments.BatimentSpeciaux;
 import Modele.Batiments.Chateau;
 import Modele.Batiments.Pont;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,15 +18,12 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 
@@ -100,11 +96,13 @@ public class IHM {
 		
 		jb.addActionListener(new BoutonListener());
 	}
+        
 	 class BoutonListener  implements ActionListener{
 		 
          /**
           * Red�finition de la m�thode actionPerformed
           */
+        @Override
          public void actionPerformed(ActionEvent arg0) {
         	 Coordonnee[] coord = jeu.getCoord();
         	 if(Integer.parseInt(jt.getText())>1 && Integer.parseInt(jt.getText())<6){
@@ -114,7 +112,7 @@ public class IHM {
 	    		jf.remove(jp);
 	    		jf.setSize(650,766);
 	 			JPanel jp1 = new JPanel();
-	 			jtab = new HashMap<Integer,ImagePanel>();
+	 			jtab = new HashMap<>();
 	 			for(int i = 14;i<36;i++){
 	 				ImagePanel imp1 = new ImagePanel(Toolkit.getDefaultToolkit().getImage("Images/ini.png"),20,20);
 	 				imp1.setLayout(null);
