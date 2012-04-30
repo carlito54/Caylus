@@ -1,14 +1,16 @@
 package Modele;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ImageList {
 	
 	private HashMap<String, Image> ouvrierList;
 	private HashMap<String, Image> maisonList;
 	private HashMap<String, Image> marqueurList;
-	
+        	
 	public ImageList(HashMap<String, Image> ouvrierList,
 			HashMap<String, Image> maisonList,
 			HashMap<String, Image> marqueurList) {
@@ -41,5 +43,5 @@ public class ImageList {
 
 	void setMarqueurList(HashMap<String, Image> marqueurList) {
 		this.marqueurList = marqueurList;
-	}	
+	}
 }

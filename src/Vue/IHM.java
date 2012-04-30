@@ -63,7 +63,7 @@ public class IHM {
         neutre = new String[6];
         neutre[0] = "Images/Bois1.jpg";
         neutre[1] = "Images/Pierre1.jpg";
-        neutre[2] = "Images/BoisNourriure1.jpg";
+        neutre[2] = "Images/BoisNourriture1.jpg";
         neutre[3] = "Images/CharpentierNeutre.jpg";
         neutre[4] = "Images/Marche1.jpg";
         neutre[5] = "Images/Nourriture1.jpg";

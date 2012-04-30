@@ -6,7 +6,10 @@ package Vue;
 
 import Modele.Batiment;
 import Modele.Jeu;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -25,10 +28,26 @@ public class Plateau extends ImagePanel {
         initComponents();
     }
     
-    private void initComponents() {        
-        //Création des cases pour les batiments normaux
+    private void initComponents() {    
+        //Création des batiments neutres
+        List<String> batNeutre = new ArrayList<>();
+        batNeutre.add("Images/Bois1.jpg");
+        batNeutre.add("Images/Pierre1.jpg");
+        batNeutre.add("Images/BoisNourriture1.jpg");
+        batNeutre.add("Images/CharpentierNeutre.jpg");
+        batNeutre.add("Images/Marche1.jpg");
+        batNeutre.add("Images/Nourriture1.jpg");
+        
+        //Mélange aléatoire
+        Collections.shuffle(batNeutre);
+        
+        for(int i = 8; i < 14; i++){
+            this.add(new Case(jeu.getCoord()[i], batNeutre.get(i-8)));
+        }
+        
+        //Création des cases vides
         for(int i = 14; i < 36; i++){
-            this.add(new Case(jeu.getCoord()[i], 70, 50));
+            this.add(new Case(jeu.getCoord()[i]));
         }
     }
 }

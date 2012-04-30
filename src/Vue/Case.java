@@ -17,15 +17,18 @@ import javax.swing.JPanel;
 public class Case extends ImagePanel {
     
     private Coordonnee coord;
-    private int largeur, longueur;
 
-    public Case(Coordonnee coord, int la, int lo) {
+    public Case(Coordonnee coord) {
         super("Images/Marche1.jpg");
         
-        this.coord = coord;
-        this.largeur = la;
-        this.longueur = lo;
+        this.coord = coord;        
+        initComponents();
+    }
+    
+    public Case(Coordonnee coord, String img) {
+        super(img);
         
+        this.coord = coord;
         initComponents();
     }
     
